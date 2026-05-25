@@ -44,3 +44,36 @@ class Trade:
     maker_agent_id: int
     taker_agent_id: int
 
+@dataclass(frozen=True)
+class OrderAccepted:
+    seq: int
+    order_id: int
+
+@dataclass(frozen=True)
+class OrderRejected:
+    seq: int
+    order_id: int
+    reason: str
+
+@dataclass(frozen=True)
+class OrderRested:
+    seq: int
+    order_id: int
+    remaining: int
+
+@dataclass(frozen=True)
+class OrderCancelled:
+    seq: int
+    order_id: int
+    cancelled: int
+    reason: str
+
+@dataclass(frozen=True)
+class OrderModified:
+    seq: int
+    order_id: int
+    new_price: int | None
+    new_quantity: int
+    kept_priority: bool
+
+Event = Trade | OrderAccepted | OrderRejected | OrderRested | OrderCancelled | OrderModified
